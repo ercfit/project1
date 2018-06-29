@@ -2,6 +2,41 @@
 
 User Stories:
 
+Game: Tennis Wars
+
+BLUF: playing card game modeled after "WAR" with Tennis Scoring and Rules
+
+Visual Components:
+-playing field/court
+-52 card deck
+-Scoreboard
+
+Rules:
+Shuffle Deck
+
+Each player picks a card--high card determines who serves 1st
+
+The "server" leads game play until the game is over, then player 2 serves (leads play).
+
+The player with the highest card wins the point--this can be the servers or the other player.
+
+Scoring is 0, 15, 30, 40 for each game.
+
+If players are tied at 40-40 (duece), "AD" scoring is initiated.
+  -if the server wins the next point, the score is "Ad-in", 
+  -else if the other player wins the point the score is "Ad-out"
+    -if whomever has the "AD" wins the next point, that player wins the game, 
+    -else if the other person wins the point, the score goes back to 40-40 (duece).
+    
+A match is won by the best of 3 sets winner.
+
+Each set is won by the 1st person to win 6 games.
+  -the winner must win by 2 games (i.e. if score is 6-5, must win by 7-5)
+  -if score is 6-6
+    -play a 7 point tiebreak(sudden death), where scoring is 1, 2, 3,....7--must win by 2.
+
+
+
 Technical Requirements
 Your app must:
 
