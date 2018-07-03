@@ -1,0 +1,21 @@
+body, html {
+    
+}
+
+.bg1 { 
+    background-color: : green;
+
+    height: 100%; 
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h2{
+	color: white;
+}
+
+tbody{
+	color: white;
+}
