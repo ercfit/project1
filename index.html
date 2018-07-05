@@ -12,50 +12,79 @@
 <body class="bg1">
 	<nav class="navbar navbar-inverse">
 	<div class="container">
-		<div>
-			<ul class="nav navbar-nav">
-				<li><a href="#">Rules</a></li>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a href="#">Rules</a>
+				</li>
 			</ul>
-		</div>
-		<div>
-			<p><span class="span1"></span></p>
-			<p><input type="text" id="input-box" placeholder="Enter 0 or 1" />
+		</div>	
+
+		<div class="row">
+		    <div class="col-med-auto">
+		      <p><span class="span1"></span></p>
+				<p><input type="text" id="input-box" placeholder="Enter 0 or 1" />
    				 <input type="submit" id="submit-btn" /></p>
-				<button class="tossCoin">TOSS COIN</button> 
-			<p><span class="span2"></span></p>
-   		</div>
+		    </div>
 
-		<div class="row1">
-			<button class="play">READY, SET, PLAY</button>
-			
-		</div>
+		    <div class="col-md-auto">
+		      <button class="tossCoin">TOSS COIN</button>
+		    </div>
 
-			<div class="row2">
+		    <div class="col-med-auto">
+		      <p><span class="span2"></span></p>
+		    </div>  
+
+	    </div>
+
+		<div class="row">
+		    <div class="col-med-auto">
+		     col 1<a>current card image</a>
+		    </div>
+
+		    <div class="col-med-auto">
+		      <button class="play">READY, SET, PLAY</button>
+		      <button id="btnClose"></button>
+		    </div>
+
+		    <div class="col-med-auto">
+		      col 3<a>current card image</a>
+		    </div>
+
+	 	</div>
+
+			<div class="row">
 				<h2>Scoreboard</h2>
 				<table class= "table table-bordered">
 					<thead class=thead-light>
 						<tr>
 							<th>Name</th>
-							<th>Game</th>
-							<th>Set</th>
+							<th>Set1</th>
+							<th>Set2</th>
+							<th>Set3</th>
+							<th>Score</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td id="p1name">Player</td>
-							<td id="p1game">4</td>
-							<td id="p1set">1</td>
+							<td id="p1set1">4</td>
+							<td id="p1set2">1</td>
+							<td id="p1set3">1</td>
+							<td id="p1score">40</td>
 						</tr>
 						<tr>
 							<td id="p2name">Computer</td>
-							<td id="p2game">3</td>
-							<td id="p2set">4</td>
+							<td id="p2set1">3</td>
+							<td id="p2set2">4</td>
+							<td id="p2set3">4</td>
+							<td id="p2score">15</td>
 						</tr>
 					</tbody>
 			</div>
 
-			<div class="row3"></div>
-		</div>
+			
+		
 	</div>
 	
 	</nav>

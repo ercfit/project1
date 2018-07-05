@@ -1,5 +1,7 @@
 
-$('.bg1').css('background-color', 'green');
+$('.bg1').css('background-image', 'url(images/tennisCourt.jpg)');
+//code for making an image a button found at http://www.jquerybyexample.net/2012/09/how-to-assign-custom-image-to-jquery-ui-button.html
+$('#btnClose').text('').append('<img src=images/drawDeck.png width=200 height=200/>').button();
 
 //start game
 $('.start-game').on('click', (e) => {
@@ -36,7 +38,7 @@ $('.tossCoin').on('click', (e) => {
 
 	function coinToss(){
 	return Math.floor(Math.random() * 2);
-}
+	}
 	console.log(coinToss());	
 	if (tossChoice == coinToss()){
 		//console.log(txt + " serves first.");
@@ -45,37 +47,26 @@ $('.tossCoin').on('click', (e) => {
 		//console.log(name + " serves first.");
 		$('.span2').append($h3).text(name + " serves first.");
 	}
-})
-})
+})//toss Coin button
+})//submit-btn
 
-//create card
-// class Card {
-// 	constructor(suit, face, value){
-// 		this.suit = suit;
-// 		this.face = face;
-// 		this.value = value;
-// 	}
-
-// 	getSuit(){
-// 		return suit;
-// 	}
-
-// 	getValue(){
-// 		return value;
-// 	}
-
-// 	getCardImage(){
-// 		return face + value;
-// 	}
-
-// }
 
 $('.play').on('click', (e) => {
 	console.log("play button works");
 	
-
 //create game object
-//create deck object
+const game = {
+				playerPoints: 0,
+				playerScore: 0,
+				computerPoints: 0,
+				computerScore: 0,
+				gamesWonbyPlayer: 0,
+				gamesWonbyComputer: 0,
+				setsWonbyPlayer: 0,
+				setsWonbyComputer: 0
+		};	
+
+//create deck array
 	
 const deck = [{suit: "Hearts",face: "ah.gif", value: 14},{suit: "Hearts", face: "2h.gif", value: 2},
 			{suit: "Hearts", face: "3h.gif", value: 3},
@@ -108,88 +99,128 @@ const deck = [{suit: "Hearts",face: "ah.gif", value: 14},{suit: "Hearts", face: 
 
 			//console.log(deck);
 
-			//shuffle deck
-			function shuffle(){
-				for(i = 0; i < deck.length; i++){
-					let randomCard = deck[(Math.floor(Math.random() * deck.length))]
-					let temp = deck[i];
-					deck[i] = randomCard;
-					randomCard = temp;
-				}
-			}
-			shuffle(deck);
-			console.log(deck);
+//played cards array			
+const discard = [];
+//shuffle deck
+function shuffle(){
+	for(i = 0; i < deck.length; i++){
+		let randomCard = deck[(Math.floor(Math.random() * deck.length))]
+		let temp = deck[i];
+		deck[i] = randomCard;
+		randomCard = temp;
+	}
+}
+shuffle(deck);
+//console.log(deck);
 
-			// function deal(){
-			// 	let currentCard = 0;
-			// 	if (currentCard < deck.length)
-			// 		return deck[currentCard++];
-			// 	else
-			// 		return null;
-			// }
-			// deal(deck);
-})
-})
-// const game = {
-// 				cardsPlayed: 0,
-// 				playerPoints: 0,
-// 				playerScore: 0,
-// 				computerPoints: 0,
-// 				computerScore: 0,
-// 				currentGame: 1,
-// 				currentSet: 1,
-// 				gamesWonbyPlayer: 0,
-// 				gamesWonbyComputer: 0,
-// 				setsWonbyPlayer: 0,
-// 				setsWonbyComputer: 0
-// 		}
-
-// };
-// calculatePlayerScore()
-// if (playerPoints = 1){
-// 	playerScore = 15
-// }if(playerPoints = 2){
-// 	playerScore = 30
-// }if(playerPoints = 3){
-// 	playerScore = 40
-// };
-
-// calculateComputerScore()
-// if (computerPoints = 1){
-// 	computerScore = 15
-// }if(computerPoints = 2){
-// 	computerScore = 30
-// }if(computerPoints = 3){
-// 	computerScore = 40
-// };
+//game loop
+//need to link toss win with 1st draw
+//if (tossChoice != coinToss){
+	//computerTurn()
+//}
 
 
+//draws one card
+function drawCard(){
+	let currentCard = 0;
+	if (currentCard < deck.length){
+		let removeCard = deck.shift();
+		console.log (removeCard);//this card is never shown, only discarded
+		discard.unshift(removeCard);
+		return deck[currentCard++];//the only way i can get this not to repeat same card is to put remove statements first
+	}else{
+		return null;
+	}
+}
+
+//need a game loop
+//while ((game.playerPoints || game.computerPoints) != 0){
+	//takeTurn();
+//}
+
+$('#btnClose').on('click', (e) => {
+	function takeTurn(){
+		const playerCard = drawCard();
+		console.log(playerCard);
+
+		const computerCard = drawCard();
+		console.log(computerCard);
+	
+		if(playerCard.value > computerCard.value){
+			game.playerPoints++;
+		}else{
+			game.computerPoints++;
+		}
+	}
+
+function calculatePlayerScore(){
+	if (game.playerPoints = 1){
+		game.playerScore = 15;
+	}else if(game.playerPoints = 2){
+		game.playerScore = 30;
+	}else if(game.playerPoints = 3){
+		game.playerScore = 40;
+	}else if (game.playerPoints = 4){
+		console.log("Game - " + txt);
+	}
+}
+
+function calculateComputerScore(){
+	if (game.computerPoints = 1){
+		game.computerScore = 15;
+	}else if(game.computerPoints = 2){
+		game.computerScore = 30;
+	}else if(game.computerPoints = 3){
+		game.computerScore = 40;
+	}else if (game.computerPoints = 4){
+		console.log("Game - " + name);
+	}
+}
+
+takeTurn();
+	console.log(game.playerPoints);
+	console.log(game.playerScore);//playerScore will not update 
+	console.log(game.computerPoints);
+	console.log(game.computerScore);//computerScore will not update
+// takeTurn();
+// 	console.log(game.playerPoints);
+// 	console.log(game.computerPoints);
+// takeTurn();
+// 	console.log(game.playerPoints);
+// 	console.log(game.computerPoints);
+// takeTurn();
+// 	console.log(discard);
+// 	console.log(game.playerPoints);
+// 	console.log(game.computerPoints);
+// 	console.log(game.playerScore);
+// 	console.log(game.computerScore);
+// calculatePlayerScore();
+// calculateComputerScore();
+// console.log(game.playerScore);
+// console.log(game.computerScore);
+
+})//corresponds to draw card button
+})//corresponds to play button
+})//corresponds to start game button
 
 
+//create card
+// class Card {
+// 	constructor(suit, face, value){
+// 		this.suit = suit;
+// 		this.face = face;
+// 		this.value = value;
+// 	}
 
+// 	getSuit(){
+// 		return suit;
+// 	}
 
+// 	getValue(){
+// 		return value;
+// 	}
 
-// 			function startMatch(){
-// 				$('.play').on('click', (e) => {
-// 					e.preventDefault();
-// 					console.log("press 'draw' button to draw a card. The player with the highest card serves first.");
-// 				}
+// 	getCardImage(){
+// 		return face + value;
+// 	}
 
-
-// 			}
-
-
-
-
-
-
-
-//set up a handler to draw cards
-// const $drawCard = $('.drawCard');
-// 	$(drawCard).on('click', (deck) => {	
-// 		deck.draw();
-// 	})
-
-
-//each player picks a card to see who goes first (**later version roll dice to see who goes first)
-//

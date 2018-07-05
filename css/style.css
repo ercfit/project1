@@ -3,13 +3,17 @@ body, html {
 }
 
 .bg1 { 
-    background-color: : green;
-
-    height: 100%; 
-
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.span1{
+	color: white;
+}
+
+.span2{
+	color: white;
 }
 
 h2{
