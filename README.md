@@ -1,6 +1,18 @@
 # project1
 
 User Stories:
+1. user presses start game button
+2. user1 prompt input name
+3. user2 prompt input name
+4. user1 prompt coin toss
+5. user1 press coin toss button
+6. server chosen--server presses ready, set, play button
+7. server press deck of cards to draw card--card appears on screen
+8. user2 press deck of cards to draw card--card appears on screen
+9. high card wins, and gains point
+10. take turns continues until game is finished
+11. user2 serves first next game
+
 
 Game: Tennis Wars
 
