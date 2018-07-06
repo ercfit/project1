@@ -3,68 +3,97 @@ $('.bg1').css('background-image', 'url(images/tennisCourt.jpg)');
 //code for making an image a button found at http://www.jquerybyexample.net/2012/09/how-to-assign-custom-image-to-jquery-ui-button.html
 $('#btnClose').text('').append('<img src=images/drawDeck.png width=200 height=200/>').button();
 
-//start game
-$('.start-game').on('click', (e) => {
-
-//get user's name and append to Scoreboard
-	const user = prompt("Please enter your name:", "Enter Name Here");
-	if (user == null || user == "") {
- 		let txt = "User cancelled the prompt.";
-	}else {
- 		txt = user;
+class Player {
+	constructor(name){
+		this.name = name;
+		this.points = 0;
+		this.score = 0;
+		this.gamesWon = 0;
+		
+	}
+	calculatePlayerScore(){ // = is assigning, == is checking
+		if (this.points == 1){
+			this.score = 15;
+		}if(this.points == 2){
+			this.score = 30;
+		}if(this.points == 3){
+			this.score = 40;
 		}
-
-   	const player = $('#p1name').text(txt);
-
-//pick random name from compName array and append to Scoreboard
-   	const compName = ["S.Williams", "V.Williams","Stephens", "Keys", "Wozniaki", "Halep", "Ostepenko", "Federer", "Nadal", "Kyrgyios", "Sock"];
-   	
-   	const name = compName[Math.floor(Math.random() * compName.length)]
-   	const compPlayer = $('#p2name').text(name);
-
-
-//coin toss to choose server
-//player chooses heads or tails button
-let $h3 = ('<h3/>')
-$('.span1').append($h3).text("Input '0' for Heads or '1' for Tails to select your toss preference, then press the Toss Coin button to see determine which player serves first.");
-
-$('#submit-btn').on('click', () => {
-
-	const tossChoice = $('#input-box').val();
-	//console.log(tossChoice);
-//player presses Toss Coin Button
-$('.tossCoin').on('click', (e) => {
-	//console.log("Coin Toss button works");
-
-	function coinToss(){
-	return Math.floor(Math.random() * 2);
 	}
-	console.log(coinToss());	
-	if (tossChoice == coinToss()){
-		//console.log(txt + " serves first.");
-		$('.span2').append($h3).text(txt + " serves first.");
-	}else{
-		//console.log(name + " serves first.");
-		$('.span2').append($h3).text(name + " serves first.");
-	}
-})//toss Coin button
-})//submit-btn
+//calculatePlayerScore end
+}//class player end
 
 
-$('.play').on('click', (e) => {
-	console.log("play button works");
-	
 //create game object
 const game = {
-				playerPoints: 0,
-				playerScore: 0,
-				computerPoints: 0,
-				computerScore: 0,
-				gamesWonbyPlayer: 0,
-				gamesWonbyComputer: 0,
-				setsWonbyPlayer: 0,
-				setsWonbyComputer: 0
-		};	
+			"activePlayer": null,
+		}	
+
+
+//start game
+$('.start-game').click(function(){
+
+//get user's name and append to Scoreboard
+	user1 = prompt("Player 1, enter your name:", "Enter Name Here");
+	if (user1 == null || user1 == "") {
+ 		let txt = "User cancelled the prompt.";
+	}else {
+ 		txt = user1;
+		}
+
+   	let player1 = $('#p1name').text(txt);
+
+	user2 = prompt("Player 2, enter your name:", "Enter Name Here");
+	if (user2 == null || user2 == "") {
+ 		let txt = "User cancelled the prompt.";
+	}else {
+ 		txt = user2;
+		}
+   	let player2 = $('#p2name').text(txt);
+
+
+	player1 = new Player(user1);
+	player2 = new Player(user2);
+
+//display coin toss buttons to choose server
+// //player chooses heads or tails button
+
+$('.span1').text("Press Heads or Tails to select your toss preference to determine which player serves first.");
+
+
+displayHeadsOrTailsButtons();
+coinToss();
+console.log(coinToss());
+
+
+function coinToss(){
+	return Math.floor(Math.random()*2);
+}
+
+function displayHeadsOrTailsButtons(){
+$('.heads').click(function(){
+	if(coinToss() == 0){
+		console.log(user1 + " serves first.");
+	}else{
+		console.log(user2 + " serves first");
+	}
+})
+
+$('.tails').click(function(){
+	if(coinToss() == 1){
+		console.log(user1 + " serves first.");
+	}else{
+		console.log(user2 + " serves first");
+	}
+})
+}
+
+$('.play').on('click', (e) => {
+ 	console.log("play button works");
+	$('.span1').hide();
+	$('.heads').hide();
+	$('.tails').hide();
+
 
 //create deck array
 	
@@ -73,33 +102,33 @@ const deck = [{suit: "Hearts",face: "ah.gif", value: 14},{suit: "Hearts", face: 
 			{suit: "Hearts", face: "4h.gif", value: 4}, {suit: "Hearts", face: "5h.gif", value: 5},
 			{suit: "Hearts", face: "6h.gif", value: 6},{suit: "Hearts", face: "7h.gif", value: 7},
 			{suit: "Hearts", face: "8h.gif", value: 8}, {suit: "Hearts", face: "9h.gif", value: 9},
-			{suit: "Hearts", face: "10h.gif", value: 10}, {suit: "Hearts", face: "jh.gif", value: 11},
+			{suit: "Hearts", face: "th.gif", value: 10}, {suit: "Hearts", face: "jh.gif", value: 11},
 			{suit: "Hearts", face: "qh.gif", value: 12}, {suit: "Hearts", face: "kh.gif", value: 13},
 			{suit: "Diamonds", face: "ad.gif", value: 14}, 
 			{suit: "Diamonds", face: "2d.gif", value: 2},{suit: "Diamonds", face: "3d.gif", value: 3},
 			{suit: "Diamonds", face: "4d.gif", value: 4}, {suit: "Diamonds", face: "5d.gif", value: 5},
 			{suit: "Diamonds", face: "6d.gif", value: 6},{suit: "Diamonds", face: "7d.gif", value: 7},
 			{suit: "Diamonds", face: "8d.gif", value: 8}, {suit: "Diamonds", face: "9d.gif", value: 9},
-			{suit: "Diamonds", face: "10d.gif", value: 10}, {suit: "Diamonds", face: "jd.gif", value: 11},
+			{suit: "Diamonds", face: "td.gif", value: 10}, {suit: "Diamonds", face: "jd.gif", value: 11},
 			{suit: "Diamonds", face: "qd.gif", value: 12}, {suit: "Diamonds", face: "kd.gif", value: 13},
 			{suit: "Clubs", face: "ac.gif", value: 14}, 
 			{suit: "Clubs", face: "2c.gif", value: 2},{suit: "Clubs", face: "3c.gif", value: 3},
 			{suit: "Clubs", face: "4c.gif", value: 4}, {suit: "Clubs", face: "5c.gif", value: 5},
 			{suit: "Clubs", face: "6c.gif", value: 6},{suit: "Clubs", face: "7c.gif", value: 7},
 			{suit: "Clubs", face: "8c.gif", value: 8}, {suit: "Clubs", face: "9c.gif", value: 9},
-			{suit: "Clubs", face: "10c.gif", value: 10}, {suit: "Clubs", face: "jc.gif", value: 11},
+			{suit: "Clubs", face: "tc.gif", value: 10}, {suit: "Clubs", face: "jc.gif", value: 11},
 			{suit: "Clubs", face: "qc.gif", value: 12}, {suit: "Clubs", face: "kc.gif", value: 13},
 			{suit: "Spades", face: "as.gif", value: 14}, 
 			{suit: "Spades", face: "2s.gif", value: 2},{suit: "Spades", face: "3s.gif", value: 3},
 			{suit: "Spades", face: "4s.gif", value: 4}, {suit: "Spades", face: "5s.gif", value: 5},
 			{suit: "Spades", face: "6s.gif", value: 6},{suit: "Spades", face: "7s.gif", value: 7},
 			{suit: "Spades", face: "8s.gif", value: 8}, {suit: "Spades", face: "9s.gif", value: 9},
-			{suit: "Spades", face: "10s.gif", value: 10}, {suit: "Spades", face: "js.gif", value: 11},
+			{suit: "Spades", face: "ts.gif", value: 10}, {suit: "Spades", face: "js.gif", value: 11},
 			{suit: "Spades", face: "qs.gif", value: 12}, {suit: "Spades", face: "ks.gif", value: 13}];
 
-			//console.log(deck);
+// 			//console.log(deck);
 
-//played cards array			
+// //played cards array			
 const discard = [];
 //shuffle deck
 function shuffle(){
@@ -111,116 +140,50 @@ function shuffle(){
 	}
 }
 shuffle(deck);
-//console.log(deck);
+// //console.log(deck);
 
-//game loop
-//need to link toss win with 1st draw
-//if (tossChoice != coinToss){
-	//computerTurn()
-//}
+// //game loop
+// //draws one card
+
+$('#btnClose').click(function(){
+	takeTurn();
+})
 
 
-//draws one card
 function drawCard(){
 	let currentCard = 0;
 	if (currentCard < deck.length){
 		let removeCard = deck.shift();
-		console.log (removeCard);//this card is never shown, only discarded
+		//this card is never shown, only discarded
 		discard.unshift(removeCard);
-		return deck[currentCard++];//the only way i can get this not to repeat same card is to put remove statements first
+		return deck[currentCard++]
 	}else{
 		return null;
 	}
 }
 
-//need a game loop
-//while ((game.playerPoints || game.computerPoints) != 0){
-	//takeTurn();
-//}
 
-$('#btnClose').on('click', (e) => {
-	function takeTurn(){
-		const playerCard = drawCard();
-		console.log(playerCard);
+function takeTurn(){
+		player1Card = drawCard();
+		$('#p1card').prepend(`<img src="images/cards/${player1Card.face}"/>`);
+		console.log(player1Card);
 
-		const computerCard = drawCard();
-		console.log(computerCard);
+		player2Card = drawCard();
+		$('#p2card').prepend(`<img src="images/cards/${player2Card.face}"/>`);
+		console.log(player2Card);
 	
-		if(playerCard.value > computerCard.value){
-			game.playerPoints++;
+		if(player1Card.value > player2Card.value){
+			player1.points++;
 		}else{
-			game.computerPoints++;
+			player2.points++;
 		}
-	}
-
-function calculatePlayerScore(){
-	if (game.playerPoints = 1){
-		game.playerScore = 15;
-	}else if(game.playerPoints = 2){
-		game.playerScore = 30;
-	}else if(game.playerPoints = 3){
-		game.playerScore = 40;
-	}else if (game.playerPoints = 4){
-		console.log("Game - " + txt);
-	}
+		player1.calculatePlayerScore();
+		player2.calculatePlayerScore();
+		$('#p1score').text(player1.score);
+		$('#p2score').text(player2.score);
 }
 
-function calculateComputerScore(){
-	if (game.computerPoints = 1){
-		game.computerScore = 15;
-	}else if(game.computerPoints = 2){
-		game.computerScore = 30;
-	}else if(game.computerPoints = 3){
-		game.computerScore = 40;
-	}else if (game.computerPoints = 4){
-		console.log("Game - " + name);
-	}
-}
-
-takeTurn();
-	console.log(game.playerPoints);
-	console.log(game.playerScore);//playerScore will not update 
-	console.log(game.computerPoints);
-	console.log(game.computerScore);//computerScore will not update
-// takeTurn();
-// 	console.log(game.playerPoints);
-// 	console.log(game.computerPoints);
-// takeTurn();
-// 	console.log(game.playerPoints);
-// 	console.log(game.computerPoints);
-// takeTurn();
-// 	console.log(discard);
-// 	console.log(game.playerPoints);
-// 	console.log(game.computerPoints);
-// 	console.log(game.playerScore);
-// 	console.log(game.computerScore);
-// calculatePlayerScore();
-// calculateComputerScore();
-// console.log(game.playerScore);
-// console.log(game.computerScore);
-
-})//corresponds to draw card button
 })//corresponds to play button
 })//corresponds to start game button
 
-
-//create card
-// class Card {
-// 	constructor(suit, face, value){
-// 		this.suit = suit;
-// 		this.face = face;
-// 		this.value = value;
-// 	}
-
-// 	getSuit(){
-// 		return suit;
-// 	}
-
-// 	getValue(){
-// 		return value;
-// 	}
-
-// 	getCardImage(){
-// 		return face + value;
-// 	}
 
