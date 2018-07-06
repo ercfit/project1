@@ -73,17 +73,17 @@ function coinToss(){
 function displayHeadsOrTailsButtons(){
 $('.heads').click(function(){
 	if(coinToss() == 0){
-		console.log(user1 + " serves first.");
+		$('.span2').text(user1 + " serves first.");
 	}else{
-		console.log(user2 + " serves first");
+		$('.span2').text(user2 + " serves first");
 	}
 })
 
 $('.tails').click(function(){
 	if(coinToss() == 1){
-		console.log(user1 + " serves first.");
+		$('.span2').text(user1 + " serves first.");
 	}else{
-		console.log(user2 + " serves first");
+		$('.span2').text(user2 + " serves first");
 	}
 })
 }
@@ -150,6 +150,7 @@ $('#btnClose').click(function(){
 })
 
 
+
 function drawCard(){
 	let currentCard = 0;
 	if (currentCard < deck.length){
@@ -164,10 +165,18 @@ function drawCard(){
 
 
 function takeTurn(){
+		// gameWonByPlayer();
+		// $('#p1set').text(player1.gamesWon);
+		// $('#p2set').text(player2.gamesWon);
+
+		//setWonbyPlayer();
+
+		//player1Card.empty(); -->  need to get the cards off the screen
 		player1Card = drawCard();
 		$('#p1card').prepend(`<img src="images/cards/${player1Card.face}"/>`);
 		console.log(player1Card);
 
+		//player2Card.empty();
 		player2Card = drawCard();
 		$('#p2card').prepend(`<img src="images/cards/${player2Card.face}"/>`);
 		console.log(player2Card);
@@ -181,7 +190,33 @@ function takeTurn(){
 		player2.calculatePlayerScore();
 		$('#p1score').text(player1.score);
 		$('#p2score').text(player2.score);
+
+		clearCards();
+
+		function clearCards(){
+		player1Card.hide();
+		player2Card.hide();
+		}
+
+		// gameWonByPlayer();
+
+		// gameWonByPlayer(){	
+		// //this should be the gameWonByPlayer Function
+		// if(player1.points > 3){
+		// 	player1.gamesWon++;
+		// }$('#p1set').text(player1.gamesWon);
+
+		// if(player2.points > 3){
+		// 	player2.gamesWon++;
+		// }$('#p2set').text(player2.gamesWon);
+		// }
+		//this should be the setWonByPlayerFunction
+		// if(player1.gamesWon == 6){
+		// 	start new set....
+		// }
 }
+
+
 
 })//corresponds to play button
 })//corresponds to start game button

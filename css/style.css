@@ -2,10 +2,51 @@ body, html {
     
 }
 
+.container{
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+	margin: 150px;
+
+}	
+
 .bg1 { 
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.row{
+	margin: 50px;
+}
+
+.row2{
+	margin: 50px;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+}
+.play{
+	border: solid black 2px; 
+	border-radius: 5px;
+	padding: 2px;	
+	margin: 2px;
+	align-items: center;
+	align-content: center;
+
+}
+#btnClose{
+	border: solid black 2px; 
+	border-radius: 5px;
+	padding: 2px;	
+	margin: 2px;
+	align-items: center;
+	align-content: center;
+
+}
+
+.row3{
+	margin: 200px 50px 0px 50px;
 }
 
 .span1{
@@ -14,13 +55,61 @@ body, html {
 }
 
 .span2{
-	color: white;
+	background-color: white;
+	color: black;
 }
 
 h2{
-	color: white;
+	color: black;
+}
+
+.table {
+	color: black; 
+	border: 5px solid black;
+	margin: 0px;
 }
 
 tbody{
-	color: white;
+	color: black;
+	font-weight: bold;
+	border: 2px solid black;
+}
+
+tr{
+	border: 2px solid black;
+
+}
+.top{
+	border-top: 2px solid black;
+}
+
+#p1set1{
+	border: 2px solid black;
+}
+
+#p1set2{
+	border: 2px solid black;
+
+}
+#p1set3{
+	border: 2px solid black;
+
+}
+#p2set1{
+	border: 2px solid black;
+
+}
+#p2set2{
+	border: 2px solid black;
+
+}
+#p2set3{
+	border: 2px solid black;
+
+}
+
+th{
+	text-decoration: underline;
+	border: 2px solid black;
+
 }
